@@ -1,1 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Camila & Mateo · Nuestra boda</title>
+
+<meta name="description" content="Una historia de amor que queremos celebrar junto a vos.">
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f7f3ec;
+    color:#40372f;
+    line-height:1.6;
+}
+
+section{
+    padding:70px 20px;
+}
+
+.container{
+    max-width:680px;
+    margin:auto;
+}
+
+h1,h2,h3{
+    font-family:Georgia, "Times New Roman", serif;
+    font-weight:normal;
+}
+
+h2{
+    font-size:30px;
+    text-align:center;
+    margin-bottom:25px;
+    letter-spacing:.5px;
+}
+
+p{
+    font-size:15px;
+}
+
+
+/* =========================
+   SOBRE / PORTADA
+========================= */
+
+.cover{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:#f7f3ec;
+    padding:30px 20px;
+    overflow:hidden;
+}
+
+.envelope-wrapper{
+    width:100%;
+    max-width:430px;
+}
+
+.envelope{
+    position:relative;
+    width:100%;
+    max-width:360px;
+    height:250px;
+    margin:0 auto 35px;
+    perspective:1000px;
+}
+
+.envelope-back{
+    position:absolute;
+    inset:0;
+    background:#e8ded0;
+    border:1px solid #c8b99f;
+    box-shadow:0 12px 35px rgba(64,55,47,.12);
+}
+
+.envelope-front{
+    position:absolute;
+    inset:0;
+    background:#eee5d9;
+    border:1px solid #c8b99f;
+    z-index:3;
+    clip-path:polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+}
+
+.envelope-flap{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:58%;
+    background:#e2d5c5;
+    border:1px solid #c8b99f;
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
+    transform-origin:top center;
+    z-index:5;
+    transition:transform 1.2s ease;
+}
+
+.envelope-content{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.envelope-small{
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:10px;
+}
+
+.envelope-names{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:31px;
+    font-style:italic;
+}
+
+.envelope-date{
+    font-size:11px;
+    letter-spacing:2px;
+    margin-top:12px;
+}
+
+.cover-text{
+    opacity:1;
+    transition:opacity .5s ease;
+}
+
+.cover-small{
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.cover-title{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:20px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:25px;
+}
+
+.open-btn{
+    display:inline-block;
+    padding:13px 30px;
+    border:1px solid #9b8b7b;
+    color:#40372f;
+    text-decoration:none;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    background:transparent;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.open-btn:hover{
+    background:#40372f;
+    color:#fff;
+}
+
+
+/* =========================
+   SOBRE ABIERTO
+========================= */
+
+.cover.opened .envelope-flap{
+    transform:rotateX(180deg);
+}
+
+.cover.opened .cover-text{
+    opacity:0;
+    pointer-events:none;
+}
+
+.cover.opened .envelope{
+    transform:translateY(-5px);
+    transition:transform .8s ease;
+}
+
+
+/* =========================
+   BIENVENIDA
+========================= */
+
+.welcome{
+    text-align:center;
+    background:#f7f3ec;
+}
+
+.welcome p{
+    max-width:540px;
+    margin:0 auto;
+}
+
+.decor-line{
+    width:50px;
+    height:1px;
+    background:#a89a8a;
+    margin:20px auto;
+}
+
+
+/* =========================
+   NOMBRES
+========================= */
+
+.names-section{
+    text-align:center;
+    background:#eee5d9;
+}
+
+.names{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:42px;
+    font-style:italic;
+    line-height:1.3;
+}
+
+.and{
+    font-size:20px;
+    margin:8px 0;
+    color:#a89a8a;
+}
+
+
+/* =========================
+   CUENTA REGRESIVA
+========================= */
+
+.countdown-section{
+    text-align:center;
+    background:#f7f3ec;
+}
+
+.countdown{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:30px;
+}
+
+.time-box{
+    width:75px;
+}
+
+.time-number{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:30px;
+}
+
+.time-label{
+    font-size:9px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+
+/* =========================
+   EVENTO
+========================= */
+
+.event{
+    text-align:center;
+    background:#eee5d9;
+}
+
+.event-card{
+    max-width:500px;
+    margin:auto;
+    padding:30px 20px;
+    border-top:1px solid #c8b99f;
+    border-bottom:1px solid #c8b99f;
+}
+
+.event-title{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:23px;
+    margin-bottom:8px;
+}
+
+.event-address{
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+.location-buttons{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.location-btn{
+    display:inline-block;
+    padding:10px 18px;
+    border:1px solid #9b8b7b;
+    color:#40372f;
+    text-decoration:none;
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+
+/* =========================
+   RSVP
+========================= */
+
+.rsvp{
+    text-align:center;
+    background:#f7f3ec;
+}
+
+.rsvp-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:13px 28px;
+    background:#40372f;
+    color:white;
+    text-decoration:none;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+
+/* =========================
+   DRESS CODE
+========================= */
+
+.dresscode{
+    text-align:center;
+    background:#eee5d9;
+}
+
+.dresscode-main{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:24px;
+    font-style:italic;
+    margin-bottom:10px;
+}
+
+
+/* =========================
+   REGALO
+========================= */
+
+.gift{
+    text-align:center;
+    background:#f7f3ec;
+}
+
+.gift-box{
+    max-width:500px;
+    margin:25px auto 0;
+    padding:30px 20px;
+    border:1px solid #d2c5b7;
+}
+
+.data{
+    margin:18px 0;
+}
+
+.data-label{
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:5px;
+}
+
+.data-value{
+    font-size:16px;
+    word-break:break-word;
+}
+
+.copy-btn{
+    margin-top:8px;
+    padding:7px 15px;
+    background:transparent;
+    border:1px solid #9b8b7b;
+    color:#40372f;
+    cursor:pointer;
+    font-size:10px;
+}
+
+
+/* =========================
+   GALERÍA
+========================= */
+
+.gallery{
+    background:#eee5d9;
+}
+
+.photos{
+    width:100%;
+    max-width:500px;
+    margin:35px auto 0;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.gallery img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    display:block;
+    filter:saturate(.75);
+    transition:transform .4s ease;
+}
+
+.gallery img:hover{
+    transform:scale(1.02);
+}
+
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.contact{
+    text-align:center;
+    background:#f7f3ec;
+}
+
+.whatsapp-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
+    border:1px solid #9b8b7b;
+    color:#40372f;
+    text-decoration:none;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:50px 20px;
+    background:#40372f;
+    color:#f7f3ec;
+}
+
+.footer-brand{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.footer-instagram{
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+.footer-phrase{
+    font-family:Georgia, "Times New Roman", serif;
+    font-size:12px;
+    font-style:italic;
+    opacity:.85;
+}
+
+
+/* =========================
+   MÚSICA
+========================= */
+
+.music-btn{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:1px solid #806f61;
+    background:#f7f3ec;
+    color:#40372f;
+    font-size:18px;
+    cursor:pointer;
+    z-index:999;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    section{
+        padding:55px 18px;
+    }
+
+    .envelope{
+        max-width:320px;
+        height:220px;
+    }
+
+    .envelope-names{
+        font-size:27px;
+    }
+
+    .names{
+        font-size:35px;
+    }
+
+    .countdown{
+        gap:7px;
+    }
+
+    .time-box{
+        width:65px;
+    }
+
+    .time-number{
+        font-size:25px;
+    }
+
+    .photos{
+        max-width:360px;
+        gap:8px;
+    }
+
+    .gallery img{
+        height:auto;
+        aspect-ratio:1 / 1;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     PORTADA / SOBRE
+========================= -->
+
+<section class="cover" id="cover">
+
+    <div class="envelope-wrapper">
+
+        <div class="envelope">
+
+            <div class="envelope-back"></div>
+
+            <div class="envelope-content">
+
+                <div class="envelope-small">
+                    Nuestra boda
+                </div>
+
+                <div class="envelope-names">
+                    Camila & Mateo
+                </div>
+
+                <div class="envelope-date">
+                    18 · 04 · 2027
+                </div>
+
+            </div>
+
+            <div class="envelope-front"></div>
+
+            <div class="envelope-flap"></div>
+
+        </div>
+
+
+        <div class="cover-text">
+
+            <div class="cover-small">
+                Tenemos el placer de invitarte
+            </div>
+
+            <div class="cover-title">
+                A celebrar nuestro amor
+            </div>
+
+            <button
+            class="open-btn"
+            onclick="openInvitation()">
+
+                Abrir invitación
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     BIENVENIDA
+========================= -->
+
+<section class="welcome" id="bienvenida">
+
+    <div class="container">
+
+        <h2>
+            Una historia que continúa
+        </h2>
+
+        <div class="decor-line"></div>
+
+        <p>
+            Después de tantos momentos compartidos,
+            queremos celebrar este nuevo capítulo
+            rodeados de las personas que más queremos.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     NOMBRES
+========================= -->
+
+<section class="names-section">
+
+    <div class="container">
+
+        <div class="names">
+            Camila
+        </div>
+
+        <div class="and">
+            &
+        </div>
+
+        <div class="names">
+            Mateo
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CUENTA REGRESIVA
+========================= -->
+
+<section class="countdown-section">
+
+    <div class="container">
+
+        <h2>
+            Falta muy poco
+        </h2>
+
+        <div class="countdown">
+
+            <div class="time-box">
+
+                <div
+                class="time-number"
+                id="days">
+
+                    00
+
+                </div>
+
+                <div class="time-label">
+                    Días
+                </div>
+
+            </div>
+
+
+            <div class="time-box">
+
+                <div
+                class="time-number"
+                id="hours">
+
+                    00
+
+                </div>
+
+                <div class="time-label">
+                    Horas
+                </div>
+
+            </div>
+
+
+            <div class="time-box">
+
+                <div
+                class="time-number"
+                id="minutes">
+
+                    00
+
+                </div>
+
+                <div class="time-label">
+                    Minutos
+                </div>
+
+            </div>
+
+
+            <div class="time-box">
+
+                <div
+                class="time-number"
+                id="seconds">
+
+                    00
+
+                </div>
+
+                <div class="time-label">
+                    Segundos
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     EVENTO
+========================= -->
+
+<section class="event">
+
+    <div class="container">
+
+        <h2>
+            El gran día
+        </h2>
+
+        <div class="event-card">
+
+            <div class="event-title">
+                Ceremonia y celebración
+            </div>
+
+            <div class="event-address">
+                Lugar del evento · Buenos Aires
+            </div>
+
+            <div class="location-buttons">
+
+                <a
+                href="https://www.google.com/maps"
+                target="_blank"
+                class="location-btn">
+
+                    Google Maps
+
+                </a>
+
+                <a
+                href="https://www.waze.com/"
+                target="_blank"
+                class="location-btn">
+
+                    Waze
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     RSVP
+========================= -->
+
+<section class="rsvp">
+
+    <div class="container">
+
+        <h2>
+            ¿Nos acompañás?
+        </h2>
+
+        <p>
+            Nos encantaría contar con tu presencia
+            en este día tan especial.
+        </p>
+
+        <a
+        href="https://forms.google.com/"
+        target="_blank"
+        class="rsvp-btn">
+
+            Confirmar asistencia
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     DRESS CODE
+========================= -->
+
+<section class="dresscode">
+
+    <div class="container">
+
+        <h2>
+            Dress code
+        </h2>
+
+        <div class="decor-line"></div>
+
+        <p class="dresscode-main">
+            Elegante
+        </p>
+
+        <p>
+            Te invitamos a elegir un look especial
+            para acompañarnos en esta celebración.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REGALO
+========================= -->
+
+<section class="gift">
+
+    <div class="container">
+
+        <h2>
+            Un detalle especial
+        </h2>
+
+        <p>
+            Si deseás hacernos un regalo,
+            podés hacerlo mediante transferencia.
+        </p>
+
+        <div class="gift-box">
+
+            <div class="data">
+
+                <div class="data-label">
+                    Alias
+                </div>
+
+                <div
+                class="data-value"
+                id="alias">
+
+                    CAMILA.MATEO
+
+                </div>
+
+                <button
+                class="copy-btn"
+                onclick="copyText('alias')">
+
+                    Copiar alias
+
+                </button>
+
+            </div>
+
+
+            <div class="data">
+
+                <div class="data-label">
+                    CBU
+                </div>
+
+                <div
+                class="data-value"
+                id="cbu">
+
+                    0000000000000000000000
+
+                </div>
+
+                <button
+                class="copy-btn"
+                onclick="copyText('cbu')">
+
+                    Copiar CBU
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     GALERÍA
+========================= -->
+
+<section class="gallery">
+
+    <div class="container">
+
+        <h2>
+            Nuestra historia
+        </h2>
+
+        <div class="decor-line"></div>
+
+        <div class="photos">
+
+            <img
+            src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg"
+            alt="Pareja">
+
+            <img
+            src="https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg"
+            alt="Boda">
+
+            <img
+            src="https://images.pexels.com/photos/169198/pexels-photo-169198.jpeg"
+            alt="Pareja">
+
+            <img
+            src="https://images.pexels.com/photos/265856/pexels-photo-265856.jpeg"
+            alt="Boda">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     WHATSAPP
+========================= -->
+
+<section class="contact">
+
+    <div class="container">
+
+        <h2>
+            ¿Tenés alguna consulta?
+        </h2>
+
+        <p>
+            Podés comunicarte con nosotros por WhatsApp.
+        </p>
+
+        <a
+        href="https://wa.me/5491100000000"
+        target="_blank"
+        class="whatsapp-btn">
+
+            Escribir por WhatsApp
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER IVORY
+========================= -->
+
+<footer>
+
+    <div class="footer-brand">
+        Ivory Diseños Digitales
+    </div>
+
+    <div class="footer-instagram">
+        @ivory.dd
+    </div>
+
+    <div class="footer-phrase">
+        Diseñamos el comienzo de momentos inolvidables.
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     MÚSICA
+========================= -->
+
+<audio
+id="music"
+loop>
+
+    <source
+    src="musica.mp3"
+    type="audio/mpeg">
+
+</audio>
+
+
+<button
+class="music-btn"
+id="musicButton"
+onclick="toggleMusic()"
+aria-label="Activar música">
+
+    ♫
+
+</button>
+
+
+<script>
+
+/* =========================
+   ABRIR INVITACIÓN
+========================= */
+
+function openInvitation(){
+
+    const cover =
+    document.getElementById("cover");
+
+    cover.classList.add("opened");
+
+    startMusic();
+
+    setTimeout(function(){
+
+        document.getElementById("bienvenida")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    },900);
+
+}
+
+
+/* =========================
+   CUENTA REGRESIVA
+========================= */
+
+const eventDate =
+new Date("April 18, 2027 19:00:00").getTime();
+
+
+function updateCountdown(){
+
+    const now =
+    new Date().getTime();
+
+    const distance =
+    eventDate - now;
+
+
+    if(distance <= 0){
+
+        document.getElementById("days").innerText="00";
+
+        document.getElementById("hours").innerText="00";
+
+        document.getElementById("minutes").innerText="00";
+
+        document.getElementById("seconds").innerText="00";
+
+        return;
+
+    }
+
+
+    const days =
+    Math.floor(
+        distance /
+        (1000 * 60 * 60 * 24)
+    );
+
+
+    const hours =
+    Math.floor(
+        (distance %
+        (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+
+    const minutes =
+    Math.floor(
+        (distance %
+        (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+
+    const seconds =
+    Math.floor(
+        (distance %
+        (1000 * 60)) /
+        1000
+    );
+
+
+    document.getElementById("days").innerText =
+    String(days).padStart(2,"0");
+
+    document.getElementById("hours").innerText =
+    String(hours).padStart(2,"0");
+
+    document.getElementById("minutes").innerText =
+    String(minutes).padStart(2,"0");
+
+    document.getElementById("seconds").innerText =
+    String(seconds).padStart(2,"0");
+
+}
+
+
+updateCountdown();
+
+setInterval(updateCountdown,1000);
+
+
+/* =========================
+   COPIAR ALIAS / CBU
+========================= */
+
+function copyText(id){
+
+    const text =
+    document.getElementById(id).innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Copiado correctamente");
+
+}
+
+
+/* =========================
+   MÚSICA
+========================= */
+
+const music =
+document.getElementById("music");
+
+const musicButton =
+document.getElementById("musicButton");
+
+
+function startMusic(){
+
+    music.play()
+    .then(function(){
+
+        musicButton.innerHTML="❚❚";
+
+    })
+    .catch(function(){
+
+    });
+
+}
+
+
+function toggleMusic(){
+
+    if(music.paused){
+
+        music.play()
+        .then(function(){
+
+            musicButton.innerHTML="❚❚";
+
+        })
+        .catch(function(){
+
+            alert(
+                "No se pudo reproducir la música. Revisá que el archivo musica.mp3 esté en el mismo lugar que index.html."
+            );
+
+        });
+
+    }else{
+
+        music.pause();
+
+        musicButton.innerHTML="♫";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
