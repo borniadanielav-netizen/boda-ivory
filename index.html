@@ -9,10 +9,6 @@
 
 <style>
 
-/* =========================================================
-   PALETA IVORY
-========================================================= */
-
 :root{
     --ivory:#EEF3FA;
     --sand:#C8DCE7;
@@ -25,9 +21,9 @@
 }
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 html{
@@ -35,12 +31,9 @@ html{
 }
 
 body{
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
     background:var(--ivory);
     color:var(--taupe);
+    font-family:Arial,Helvetica,sans-serif;
     overflow-x:hidden;
 }
 
@@ -48,1047 +41,804 @@ button{
     font-family:inherit;
 }
 
-
-/* =========================================================
-   PORTADA
-========================================================= */
+/* =========================
+   PORTADA / SOBRE
+========================= */
 
 .cover{
-    min-height:100vh;
-    min-height:100svh;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    background:var(--ivory);
     display:flex;
     align-items:center;
     justify-content:center;
-    position:relative;
     overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(168,200,197,.25),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(213,194,158,.20),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #F7FAFD 0%,
-            var(--ivory) 100%
-        );
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
 }
 
-.envelope-wrapper{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+.cover.opened{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 }
 
 .envelope{
-    width:min(430px,82vw);
-    height:min(290px,55vw);
-    min-height:230px;
     position:relative;
+    width:min(88vw,620px);
+    height:min(62vw,390px);
+    min-height:280px;
     perspective:1200px;
 }
 
-
-/* =========================================================
-   SOBRE
-========================================================= */
-
-.envelope-back{
+.envelope-body{
     position:absolute;
     inset:0;
-
-    background:#C8DCE7;
-
-    border-radius:5px;
-
+    background:var(--sand);
+    border-radius:4px;
     box-shadow:
-        0 25px 60px rgba(53,107,130,.18),
-        0 8px 20px rgba(53,107,130,.10);
+        0 25px 60px rgba(41,79,101,.16);
+    overflow:hidden;
 }
 
-
-/* CONTENIDO INTERNO VACÍO */
-
-.envelope-content{
+.envelope-left,
+.envelope-right,
+.envelope-bottom{
     position:absolute;
-    inset:0;
-    z-index:2;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    pointer-events:none;
+    z-index:3;
 }
 
-
-/* =========================================================
-   SELLO
-========================================================= */
-
-.shell-seal{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    width:55px;
-    height:55px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:30px;
-
-    background:
-        rgba(248,248,245,.92);
-
-    border-radius:50%;
-
-    box-shadow:
-        0 6px 18px rgba(53,107,130,.18);
-
-    z-index:7;
-
-    transition:
-        opacity .45s ease,
-        transform .65s ease;
-}
-
-
-/* =========================================================
-   FRENTE DEL SOBRE
-========================================================= */
-
-.envelope-front{
-    position:absolute;
-
+.envelope-left{
     left:0;
+    bottom:0;
+    width:52%;
+    height:100%;
+    background:#BCD3DF;
+    clip-path:polygon(0 0,100% 100%,0 100%);
+}
+
+.envelope-right{
     right:0;
     bottom:0;
-
-    height:72%;
-
-    z-index:3;
-
-    background:#BFD6E2;
-
-    clip-path:polygon(
-        0 0,
-        50% 58%,
-        100% 0,
-        100% 100%,
-        0 100%
-    );
-
-    border-radius:
-        0 0 5px 5px;
+    width:52%;
+    height:100%;
+    background:#B5CFDC;
+    clip-path:polygon(100% 0,100% 100%,0 100%);
 }
 
-
-/* =========================================================
-   SOLAPA
-========================================================= */
+.envelope-bottom{
+    left:0;
+    bottom:0;
+    width:100%;
+    height:78%;
+    background:#C5DCE6;
+    clip-path:polygon(0 100%,50% 28%,100% 100%);
+    z-index:4;
+}
 
 .envelope-flap{
     position:absolute;
-
-    left:0;
-    right:0;
     top:0;
-
-    height:67%;
-
-    z-index:6;
-
+    left:0;
+    width:100%;
+    height:72%;
+    background:#AEC9D6;
+    clip-path:polygon(0 0,100% 0,50% 100%);
     transform-origin:top center;
-    transform-style:preserve-3d;
-
-    background:#D3E3EB;
-
-    clip-path:polygon(
-        0 0,
-        100% 0,
-        50% 100%
-    );
-
+    z-index:8;
     transition:
-        transform 1.15s cubic-bezier(.2,.75,.25,1);
+        transform 1.5s cubic-bezier(.65,0,.35,1);
 }
 
+.opened .envelope-flap{
+    transform:rotateX(180deg);
+}
 
-/* =========================================================
-   MONOGRAMA
-========================================================= */
-
-.rising-monogram{
+.envelope-paper{
     position:absolute;
-
-    left:50%;
-    bottom:24%;
-
-    transform:
-        translate(-50%,95px)
-        scale(.82);
-
-    opacity:0;
-
-    z-index:10;
-
-    pointer-events:none;
-
-    white-space:nowrap;
-
+    left:8%;
+    width:84%;
+    height:88%;
+    bottom:-4%;
+    background:var(--white);
+    z-index:2;
+    border-radius:3px;
     transition:
-        transform 1.45s cubic-bezier(.2,.72,.25,1),
-        opacity .7s ease;
+        transform 1.6s cubic-bezier(.65,0,.35,1);
+    box-shadow:0 8px 30px rgba(41,79,101,.10);
 }
+
+.opened .envelope-paper{
+    transform:translateY(-55%);
+}
+
+/* =========================
+   MONOGRAMA
+========================= */
 
 .monogram{
+    position:absolute;
+    z-index:20;
+    left:50%;
+    bottom:30%;
+    transform:
+        translate(-50%,80px)
+        scale(.9);
+    opacity:0;
+
+    text-align:center;
+
+    transition:
+        transform 1.5s cubic-bezier(.22,1,.36,1) .65s,
+        opacity 1s ease .65s;
+}
+
+.opened .monogram{
+    transform:
+        translate(-50%,0)
+        scale(1);
+    opacity:1;
+}
+
+.monogram-main{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(38px,7vw,62px);
+    color:var(--ocean);
+    letter-spacing:4px;
+    white-space:nowrap;
+}
+
+.monogram-name{
+    margin-top:10px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(13px,2.5vw,18px);
+    letter-spacing:3px;
+    color:var(--taupe);
+}
+
+/* =========================
+   SELLO
+========================= */
+
+.shell{
+    position:absolute;
+    z-index:30;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:64px;
+    height:64px;
+
     display:flex;
     align-items:center;
     justify-content:center;
 
-    gap:12px;
-
-    color:var(--ocean);
-
-    text-shadow:
-        0 2px 12px rgba(53,107,130,.13);
-}
-
-.monogram-letter{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:58px;
-    font-style:italic;
-    line-height:1;
-}
-
-.monogram-heart{
-    color:var(--coral);
-    font-size:25px;
-
-    transform:
-        translateY(-3px);
-}
-
-.monogram-names{
-    margin-top:12px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:17px;
-    letter-spacing:2px;
-
-    text-align:center;
-
-    color:var(--taupe);
-}
-
-
-/* =========================================================
-   BRILLOS
-========================================================= */
-
-.sparkles{
-    position:absolute;
-    inset:0;
-
-    z-index:11;
-
-    pointer-events:none;
-}
-
-.sparkles span{
-    position:absolute;
-
-    width:6px;
-    height:6px;
-
-    background:white;
-
+    background:#D6C5A4;
     border-radius:50%;
 
-    opacity:0;
+    font-size:28px;
 
     box-shadow:
-        0 0 10px rgba(255,255,255,.95);
-}
-
-.sparkles span:nth-child(1){
-    left:18%;
-    top:30%;
-}
-
-.sparkles span:nth-child(2){
-    left:78%;
-    top:26%;
-}
-
-.sparkles span:nth-child(3){
-    left:24%;
-    top:68%;
-}
-
-.sparkles span:nth-child(4){
-    left:82%;
-    top:65%;
-}
-
-
-/* =========================================================
-   DECORACIÓN DEL SOBRE
-========================================================= */
-
-.corner-botanical{
-    position:absolute;
-
-    width:90px;
-    height:90px;
-
-    z-index:4;
-
-    opacity:.35;
-
-    pointer-events:none;
-}
-
-.corner-left{
-    left:-20px;
-    bottom:-15px;
-
-    border-left:
-        2px solid var(--aqua);
-
-    border-bottom:
-        2px solid var(--aqua);
-
-    border-radius:
-        0 0 0 70px;
-
-    transform:
-        rotate(-10deg);
-}
-
-.corner-right{
-    right:-20px;
-    bottom:-15px;
-
-    border-right:
-        2px solid var(--aqua);
-
-    border-bottom:
-        2px solid var(--aqua);
-
-    border-radius:
-        0 0 70px 0;
-
-    transform:
-        rotate(10deg);
-}
-
-
-/* =========================================================
-   TEXTO DE PORTADA
-========================================================= */
-
-.cover-text{
-    margin-top:55px;
-
-    text-align:center;
+        0 8px 20px rgba(41,79,101,.14);
 
     transition:
-        opacity .6s ease,
-        transform .6s ease;
+        opacity .5s ease,
+        transform .8s ease;
 }
 
-.cover-small{
-    font-size:12px;
+.opened .shell{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.5);
+}
 
-    letter-spacing:2px;
+/* =========================
+   PORTADA TEXTO
+========================= */
 
+.cover-content{
+    position:absolute;
+    z-index:40;
+    left:50%;
+    bottom:8%;
+    transform:translateX(-50%);
+    text-align:center;
+    width:90%;
+    transition:opacity .6s ease;
+}
+
+.opened .cover-content{
+    opacity:0;
+}
+
+.cover-eyebrow{
     text-transform:uppercase;
-
-    color:var(--ocean);
-
+    letter-spacing:5px;
+    font-size:10px;
+    color:var(--coral);
     margin-bottom:12px;
 }
 
 .cover-title{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:30px;
-
-    color:var(--taupe);
-
-    margin-bottom:25px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:400;
+    font-size:28px;
+    color:var(--ocean);
+    margin-bottom:12px;
 }
 
+.cover-date{
+    font-size:10px;
+    letter-spacing:4px;
+    color:var(--taupe);
+    margin-bottom:24px;
+}
 
-/* =========================================================
-   BOTÓN
-========================================================= */
+.open-button{
+    border:1px solid var(--champagne);
+    background:rgba(248,248,245,.9);
+    color:var(--ocean);
+    padding:13px 25px;
+    letter-spacing:2px;
+    font-size:10px;
+    cursor:pointer;
+    transition:.3s ease;
+}
 
-.open-btn{
-    border:none;
-
+.open-button:hover{
     background:var(--ocean);
     color:white;
-
-    padding:13px 28px;
-
-    border-radius:30px;
-
-    font-size:13px;
-
-    letter-spacing:1px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 8px 20px rgba(53,107,130,.20);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
 }
 
-.open-btn:hover{
-    transform:
-        translateY(-2px);
+/* =========================
+   CONTENIDO
+========================= */
 
-    box-shadow:
-        0 12px 25px rgba(53,107,130,.28);
+main{
+    background:var(--ivory);
 }
 
-.open-btn:active{
-    transform:
-        scale(.97);
+.section{
+    padding:100px 25px;
 }
 
-
-/* =========================================================
-   SOBRE ABIERTO
-========================================================= */
-
-.cover.opened .envelope-flap{
-    transform:
-        rotateX(180deg);
-}
-
-.cover.opened .shell-seal{
-    opacity:0;
-
-    transform:
-        translate(-50%,-12px)
-        scale(.8);
-}
-
-.cover.opened .rising-monogram{
-    opacity:1;
-
-    transform:
-        translate(-50%,-112px)
-        scale(1);
-}
-
-.cover.opened .cover-text{
-    opacity:0;
-
-    pointer-events:none;
-
-    transform:
-        translateY(10px);
-}
-
-
-/* =========================================================
-   BRILLOS AL ABRIR
-========================================================= */
-
-.cover.opened .sparkles span{
-    animation:
-        sparkle .9s ease forwards;
-}
-
-.cover.opened .sparkles span:nth-child(1){
-    animation-delay:.35s;
-}
-
-.cover.opened .sparkles span:nth-child(2){
-    animation-delay:.55s;
-}
-
-.cover.opened .sparkles span:nth-child(3){
-    animation-delay:.75s;
-}
-
-.cover.opened .sparkles span:nth-child(4){
-    animation-delay:.95s;
-}
-
-@keyframes sparkle{
-
-    0%{
-        opacity:0;
-        transform:scale(.3);
-    }
-
-    50%{
-        opacity:1;
-        transform:scale(1.5);
-    }
-
-    100%{
-        opacity:0;
-        transform:scale(.5);
-    }
-
-}
-
-
-/* =========================================================
-   SECCIÓN BIENVENIDA
-========================================================= */
+/* =========================
+   BIENVENIDA
+========================= */
 
 .welcome{
-    padding:
-        120px 25px 100px;
-
     text-align:center;
-
-    background:var(--white);
+    max-width:800px;
+    margin:auto;
 }
 
-.welcome-inner{
-    max-width:680px;
-
-    margin:0 auto;
-}
-
-.eyebrow{
+.welcome .eyebrow{
     text-transform:uppercase;
-
     letter-spacing:4px;
-
     font-size:10px;
-
     color:var(--coral);
-
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
-.welcome h2{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+.welcome h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:44px;
     font-weight:400;
-
-    font-size:40px;
-
     color:var(--ocean);
-
     margin-bottom:25px;
 }
 
 .welcome p{
-    max-width:550px;
-
-    margin:0 auto;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:16px;
-
+    max-width:620px;
+    margin:auto;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:17px;
     line-height:1.9;
-
     color:var(--taupe);
 }
 
+/* =========================
+   HISTORIA
+========================= */
 
-/* =========================================================
-   FOTOS
-========================================================= */
-
-.photos{
-    padding:
-        30px 20px 110px;
-
+.story{
     background:var(--white);
+    text-align:center;
 }
 
-.photos-inner{
-    max-width:1050px;
-
-    margin:0 auto;
+.story-inner{
+    max-width:900px;
+    margin:auto;
 }
 
-.photo-grid{
+.story .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:10px;
+    color:var(--coral);
+    margin-bottom:18px;
+}
+
+.story h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:38px;
+    font-weight:400;
+    color:var(--ocean);
+    margin-bottom:22px;
+}
+
+.story p{
+    max-width:650px;
+    margin:0 auto 45px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:16px;
+    line-height:1.9;
+    color:var(--taupe);
+}
+
+.story-gallery{
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:18px;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
 }
 
-.photo{
-    position:relative;
-
-    overflow:hidden;
-
-    background:var(--sand);
-
-    border-radius:4px;
-
-    box-shadow:
-        0 12px 35px rgba(53,107,130,.10);
-}
-
-.photo img{
+.story-gallery img{
     width:100%;
-    height:100%;
-
-    display:block;
-
+    height:360px;
     object-fit:cover;
-
-    transition:
-        transform .7s ease;
+    display:block;
 }
 
-.photo:hover img{
-    transform:scale(1.035);
-}
-
-.photo:nth-child(1){
-    height:520px;
-}
-
-.photo:nth-child(2){
-    height:520px;
-}
-
-.photo:nth-child(3){
-    height:400px;
-}
-
-.photo:nth-child(4){
-    height:400px;
-}
-
-
-/* =========================================================
-   UN DÍA PARA RECORDAR
-========================================================= */
+/* =========================
+   DETALLES
+========================= */
 
 .details{
     background:var(--ivory);
-
-    padding:
-        115px 25px 105px;
-
+    padding:110px 25px 100px;
     text-align:center;
 }
 
 .details-inner{
     width:100%;
-
     max-width:620px;
-
     margin:0 auto;
 }
 
+.details .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:10px;
+    color:var(--coral);
+    margin-bottom:18px;
+}
+
 .details h2{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family:Georgia,"Times New Roman",serif;
     font-weight:400;
-
-    font-size:39px;
-
+    font-size:38px;
     letter-spacing:.5px;
-
     color:var(--ocean);
-
     margin-bottom:22px;
 }
 
 .details-intro{
     max-width:480px;
-
-    margin:
-        0 auto 65px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    margin:0 auto 45px;
+    font-family:Georgia,"Times New Roman",serif;
     font-size:16px;
-
     line-height:1.9;
-
     color:var(--taupe);
 }
 
+/* =========================
+   CUENTA REGRESIVA
+========================= */
 
-/* =========================================================
+.countdown{
+    margin:0 auto 65px;
+    padding:30px 20px 32px;
+    max-width:560px;
+    border-top:1px solid rgba(213,194,158,.55);
+    border-bottom:1px solid rgba(213,194,158,.55);
+}
+
+.countdown-title{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:16px;
+    font-style:italic;
+    color:var(--coral);
+    margin-bottom:23px;
+}
+
+.countdown-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.countdown-item{
+    text-align:center;
+}
+
+.countdown-item strong{
+    display:block;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:31px;
+    font-weight:400;
+    color:var(--ocean);
+    letter-spacing:1px;
+    line-height:1;
+    margin-bottom:10px;
+}
+
+.countdown-item span{
+    display:block;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:8px;
+    letter-spacing:2px;
+    color:#78909C;
+}
+
+/* =========================
    ITEMS VERTICALES
-========================================================= */
+========================= */
 
 .detail-item{
     width:100%;
-
-    padding:
-        15px 20px 25px;
+    padding:15px 20px 25px;
 }
 
 .detail-icon{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family:Georgia,"Times New Roman",serif;
     color:var(--coral);
-
     font-size:20px;
-
     margin-bottom:15px;
 }
 
 .detail-item h3{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family:Georgia,"Times New Roman",serif;
     font-weight:400;
-
     font-size:25px;
-
     letter-spacing:.5px;
-
     color:var(--ocean);
-
     margin-bottom:13px;
 }
 
 .detail-item p{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
+    font-family:Georgia,"Times New Roman",serif;
     font-size:16px;
-
     color:var(--taupe);
-
     margin-bottom:7px;
 }
 
 .detail-item span{
     display:block;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family:Arial,Helvetica,sans-serif;
     font-size:11px;
-
     letter-spacing:1.5px;
-
     color:#6E8795;
 }
 
-
-/* =========================================================
-   SEPARADORES
-========================================================= */
-
 .detail-separator{
     width:100%;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:15px;
-
     color:var(--champagne);
-
     font-size:12px;
-
     margin:10px 0;
 }
 
 .detail-separator::before,
 .detail-separator::after{
     content:"";
-
     display:block;
-
     width:75px;
-
     height:1px;
-
-    background:
-        rgba(213,194,158,.55);
+    background:rgba(213,194,158,.55);
 }
 
+/* =========================
+   UBICACIÓN
+========================= */
 
-/* =========================================================
-   FIRMA IVORY
-========================================================= */
+.location{
+    background:var(--white);
+    text-align:center;
+}
+
+.location-inner{
+    max-width:650px;
+    margin:auto;
+}
+
+.location .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:10px;
+    color:var(--coral);
+    margin-bottom:18px;
+}
+
+.location h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:400;
+    font-size:38px;
+    color:var(--ocean);
+    margin-bottom:20px;
+}
+
+.location p{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:16px;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.location-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.location-button{
+    display:inline-block;
+    text-decoration:none;
+    border:1px solid var(--champagne);
+    padding:13px 22px;
+    color:var(--ocean);
+    font-size:10px;
+    letter-spacing:1.5px;
+    transition:.3s ease;
+}
+
+.location-button:hover{
+    background:var(--ocean);
+    color:white;
+}
+
+/* =========================
+   CONFIRMACIÓN
+========================= */
+
+.confirmation{
+    text-align:center;
+    background:var(--ivory);
+}
+
+.confirmation-inner{
+    max-width:620px;
+    margin:auto;
+}
+
+.confirmation h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:400;
+    font-size:38px;
+    color:var(--ocean);
+    margin-bottom:20px;
+}
+
+.confirmation p{
+    font-family:Georgia,"Times New Roman",serif;
+    line-height:1.8;
+    margin-bottom:28px;
+}
+
+.confirmation-button{
+    display:inline-block;
+    text-decoration:none;
+    border:1px solid var(--champagne);
+    color:var(--ocean);
+    padding:14px 28px;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+/* =========================
+   REGALO
+========================= */
+
+.gift{
+    text-align:center;
+    background:var(--white);
+}
+
+.gift-inner{
+    max-width:600px;
+    margin:auto;
+}
+
+.gift .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:10px;
+    color:var(--coral);
+    margin-bottom:18px;
+}
+
+.gift h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:400;
+    font-size:38px;
+    color:var(--ocean);
+    margin-bottom:22px;
+}
+
+.gift p{
+    font-family:Georgia,"Times New Roman",serif;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.bank-box{
+    border-top:1px solid rgba(213,194,158,.5);
+    border-bottom:1px solid rgba(213,194,158,.5);
+    padding:25px;
+}
+
+.alias{
+    font-family:Georgia,"Times New Roman",serif;
+    color:var(--ocean);
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.cbu{
+    font-size:11px;
+    letter-spacing:1px;
+    color:#78909C;
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.contact{
+    text-align:center;
+    background:var(--ivory);
+}
+
+.contact h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-weight:400;
+    font-size:36px;
+    color:var(--ocean);
+    margin-bottom:20px;
+}
+
+.contact p{
+    font-family:Georgia,"Times New Roman",serif;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.contact-button{
+    display:inline-block;
+    text-decoration:none;
+    border:1px solid var(--champagne);
+    padding:13px 25px;
+    color:var(--ocean);
+    font-size:10px;
+    letter-spacing:1.5px;
+}
+
+/* =========================
+   FIRMA FINAL
+========================= */
 
 .ivory-signature{
-    padding:
-        75px 20px 80px;
-
+    padding:75px 20px 80px;
     text-align:center;
-
     background:var(--white);
 }
 
 .ivory-line{
     width:45px;
-
     height:1px;
-
     background:var(--champagne);
+    margin:0 auto 28px;
+}
 
-    margin:
-        0 auto 28px;
+.final-names{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:26px;
+    color:var(--ocean);
+    margin-bottom:18px;
 }
 
 .ivory-logo{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:26px;
-
-    letter-spacing:9px;
-
-    color:var(--ocean);
-
-    font-weight:400;
-
-    margin-left:9px;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:22px;
+    letter-spacing:8px;
+    color:var(--taupe);
+    margin-left:8px;
 }
 
 .ivory-subtitle{
-    margin-top:10px;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    margin-top:8px;
     font-size:8px;
-
     letter-spacing:3px;
-
     color:#8BA0AA;
 }
 
-
-/* =========================================================
-   MÚSICA
-========================================================= */
+/* =========================
+   BOTÓN MÚSICA
+========================= */
 
 .music-btn{
     position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:500;
 
-    right:22px;
-    bottom:22px;
+    width:46px;
+    height:46px;
 
-    width:48px;
-    height:48px;
-
-    border:none;
-
+    border:1px solid var(--champagne);
     border-radius:50%;
 
-    background:var(--ocean);
-
-    color:white;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:19px;
+    background:rgba(248,248,245,.95);
+    color:var(--ocean);
 
     cursor:pointer;
 
-    z-index:9999;
+    font-size:17px;
 
     box-shadow:
-        0 8px 25px rgba(53,107,130,.25);
-
-    transition:
-        transform .25s ease;
+        0 8px 20px rgba(41,79,101,.12);
 }
 
-.music-btn:hover{
-    transform:
-        scale(1.08);
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-    padding:
-        55px 20px;
-
-    text-align:center;
-
-    background:var(--taupe);
-
-    color:white;
-}
-
-footer .footer-names{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:26px;
-
-    margin-bottom:10px;
-}
-
-footer p{
-    opacity:.8;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-}
-
-
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media(max-width:600px){
 
     .envelope{
-        width:86vw;
+        width:88vw;
         height:58vw;
-        min-height:210px;
+        min-height:250px;
     }
 
-    .cover-text{
-        margin-top:42px;
-        padding:0 20px;
+    .cover-content{
+        bottom:5%;
     }
 
     .cover-title{
-        font-size:27px;
+        font-size:25px;
     }
 
-    .cover-small{
-        font-size:10px;
+    .welcome h1{
+        font-size:36px;
     }
 
-    .monogram-letter{
-        font-size:48px;
+    .section{
+        padding:85px 22px;
     }
 
-    .monogram-heart{
-        font-size:21px;
-    }
-
-    .monogram-names{
-        font-size:14px;
-        letter-spacing:1.5px;
-    }
-
-    .cover.opened .rising-monogram{
-        transform:
-            translate(-50%,-82px)
-            scale(1);
-    }
-
-
-    /* BIENVENIDA */
-
-    .welcome{
-        padding:
-            90px 22px 75px;
-    }
-
-    .welcome h2{
+    .story h2,
+    .details h2,
+    .location h2,
+    .gift h2{
         font-size:32px;
     }
 
-
-    /* FOTOS */
-
-    .photos{
-        padding:
-            15px 18px 80px;
-    }
-
-    .photo-grid{
+    .story-gallery{
         grid-template-columns:1fr;
-
-        gap:14px;
+        gap:12px;
     }
 
-    .photo:nth-child(1),
-    .photo:nth-child(2),
-    .photo:nth-child(3),
-    .photo:nth-child(4){
-        height:430px;
+    .story-gallery img{
+        height:330px;
     }
-
-
-    /* DETALLES */
 
     .details{
-        padding:
-            90px 22px 80px;
+        padding:90px 22px 80px;
     }
 
     .details h2{
@@ -1097,15 +847,30 @@ footer p{
 
     .details-intro{
         font-size:15px;
-
         line-height:1.8;
+        margin-bottom:45px;
+    }
 
+    .countdown{
         margin-bottom:50px;
+        padding:25px 5px 28px;
+    }
+
+    .countdown-grid{
+        gap:4px;
+    }
+
+    .countdown-item strong{
+        font-size:25px;
+    }
+
+    .countdown-item span{
+        font-size:7px;
+        letter-spacing:1.3px;
     }
 
     .detail-item{
-        padding:
-            12px 10px 22px;
+        padding:12px 10px 22px;
     }
 
     .detail-item h3{
@@ -1121,28 +886,13 @@ footer p{
         width:55px;
     }
 
-
-    /* IVORY */
-
-    .ivory-signature{
-        padding:
-            60px 20px 70px;
+    .final-names{
+        font-size:23px;
     }
 
     .ivory-logo{
-        font-size:23px;
+        font-size:20px;
         letter-spacing:7px;
-    }
-
-
-    /* MÚSICA */
-
-    .music-btn{
-        width:44px;
-        height:44px;
-
-        right:16px;
-        bottom:16px;
     }
 
 }
@@ -1150,206 +900,149 @@ footer p{
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =====================================================
+<!-- =========================
      PORTADA
-====================================================== -->
+========================= -->
 
-<section
-    class="cover"
-    id="cover">
+<section class="cover" id="cover">
 
-    <div class="envelope-wrapper">
+    <div class="envelope">
 
-        <div class="envelope">
+        <div class="envelope-body"></div>
 
+        <div class="envelope-paper"></div>
 
-            <!-- FONDO DEL SOBRE -->
+        <div class="envelope-left"></div>
+        <div class="envelope-right"></div>
+        <div class="envelope-bottom"></div>
 
-            <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
 
-
-            <!-- INTERIOR VACÍO -->
-
-            <div class="envelope-content">
-
-                <div
-                    class="shell-seal"
-                    aria-hidden="true">
-
-                    🐚
-
-                </div>
-
-            </div>
-
-
-            <!-- MONOGRAMA QUE SUBE -->
-
-            <div class="rising-monogram">
-
-                <div class="monogram">
-
-                    <span class="monogram-letter">
-                        C
-                    </span>
-
-                    <span class="monogram-heart">
-                        ♡
-                    </span>
-
-                    <span class="monogram-letter">
-                        M
-                    </span>
-
-                </div>
-
-                <div class="monogram-names">
-                    Camila & Mateo
-                </div>
-
-            </div>
-
-
-            <!-- BRILLOS -->
-
-            <div class="sparkles">
-
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </div>
-
-
-            <!-- FRENTE -->
-
-            <div class="envelope-front"></div>
-
-
-            <!-- SOLAPA -->
-
-            <div class="envelope-flap"></div>
-
-
-            <!-- DECORACIÓN -->
-
-            <div class="corner-botanical corner-left"></div>
-            <div class="corner-botanical corner-right"></div>
-
+        <div class="shell">
+            🐚
         </div>
 
-
-        <!-- TEXTO PORTADA -->
-
-        <div class="cover-text">
-
-            <div class="cover-small">
-                Hacé clic para descubrir nuestra historia
+        <div class="monogram">
+            <div class="monogram-main">
+                C ♡ M
             </div>
 
-            <div class="cover-title">
-                Nuestra boda
+            <div class="monogram-name">
+                Camila & Mateo
             </div>
-
-            <button
-                class="open-btn"
-                onclick="openInvitation()">
-
-                Abrir invitación
-
-            </button>
-
         </div>
+
+    </div>
+
+    <div class="cover-content">
+
+        <div class="cover-eyebrow">
+            Nuestra boda
+        </div>
+
+        <div class="cover-title">
+            Camila & Mateo
+        </div>
+
+        <div class="cover-date">
+            18 · 04 · 2027
+        </div>
+
+        <button
+            class="open-button"
+            onclick="openInvitation()">
+            Abrir invitación
+        </button>
 
     </div>
 
 </section>
 
 
+<!-- =========================
+     MÚSICA
+========================= -->
 
-<!-- =====================================================
-     BIENVENIDA
-====================================================== -->
+<audio id="music" loop preload="auto">
+    <source
+        src="./musica.mp3.mp3"
+        type="audio/mpeg">
+</audio>
 
-<section
-    class="welcome"
-    id="bienvenida">
+<button
+    class="music-btn"
+    id="musicButton"
+    onclick="toggleMusic()"
+    aria-label="Activar música">
+    ♫
+</button>
 
-    <div class="welcome-inner">
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
+<main>
+
+    <!-- BIENVENIDA -->
+
+    <section
+        class="section welcome"
+        id="bienvenida">
 
         <div class="eyebrow">
             Camila & Mateo
         </div>
 
-        <h2>
+        <h1>
             Nuestra historia
-        </h2>
+        </h1>
 
         <p>
             Hay momentos que queremos guardar para siempre,
-            y este es uno de ellos.
-            Queremos compartir con ustedes el comienzo
-            de una nueva etapa de nuestras vidas.
+            y este es uno de ellos. Queremos compartir con
+            ustedes el comienzo de una nueva etapa de
+            nuestras vidas.
         </p>
 
-    </div>
-
-</section>
+    </section>
 
 
+    <!-- HISTORIA -->
 
-<!-- =====================================================
-     FOTOS
-====================================================== -->
+    <section class="section story">
 
-<section class="photos">
+        <div class="story-inner">
 
-    <div class="photos-inner">
+            <div class="eyebrow">
+                Nuestra historia
+            </div>
 
-        <div class="photo-grid">
+            <h2>
+                Un amor para celebrar
+            </h2>
 
+            <p>
+                Después de tantos momentos compartidos,
+                llegó el día de celebrar nuestro amor
+                rodeados de las personas que más queremos.
+            </p>
 
-            <!-- FOTO 1 -->
-
-            <div class="photo">
+            <div class="story-gallery">
 
                 <img
                     src="https://images.pexels.com/photos/39394234/pexels-photo-39394234.jpeg"
                     alt="Camila y Mateo">
 
-            </div>
-
-
-            <!-- FOTO 2 -->
-
-            <div class="photo">
-
                 <img
                     src="https://images.pexels.com/photos/30232952/pexels-photo-30232952.jpeg"
                     alt="Momentos de Camila y Mateo">
 
-            </div>
-
-
-            <!-- FOTO 3 -->
-
-            <div class="photo">
-
                 <img
                     src="https://images.pexels.com/photos/25361559/pexels-photo-25361559.jpeg"
                     alt="Celebración de boda">
-
-            </div>
-
-
-            <!-- FOTO 4 -->
-
-            <div class="photo">
 
                 <img
                     src="https://images.pexels.com/photos/33535553/pexels-photo-33535553.jpeg"
@@ -1359,197 +1052,305 @@ footer p{
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
+    <!-- DETALLES -->
 
-<!-- =====================================================
-     UN DÍA PARA RECORDAR
-====================================================== -->
+    <section
+        class="section details">
 
-<section class="section details">
+        <div class="details-inner">
 
-    <div class="details-inner">
+            <div class="eyebrow">
+                Camila & Mateo
+            </div>
+
+            <h2>
+                Un día para recordar
+            </h2>
+
+            <p class="details-intro">
+                Estamos felices de poder celebrar este
+                momento rodeados de las personas que queremos.
+            </p>
 
 
-        <div class="eyebrow">
+            <!-- CUENTA REGRESIVA -->
+
+            <div class="countdown">
+
+                <div class="countdown-title">
+                    Faltan
+                </div>
+
+                <div class="countdown-grid">
+
+                    <div class="countdown-item">
+                        <strong id="days">000</strong>
+                        <span>DÍAS</span>
+                    </div>
+
+                    <div class="countdown-item">
+                        <strong id="hours">00</strong>
+                        <span>HORAS</span>
+                    </div>
+
+                    <div class="countdown-item">
+                        <strong id="minutes">00</strong>
+                        <span>MINUTOS</span>
+                    </div>
+
+                    <div class="countdown-item">
+                        <strong id="seconds">00</strong>
+                        <span>SEGUNDOS</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CEREMONIA -->
+
+            <div class="detail-item">
+
+                <div class="detail-icon">
+                    ♡
+                </div>
+
+                <h3>
+                    Ceremonia
+                </h3>
+
+                <p>
+                    18 de abril de 2027
+                </p>
+
+                <span>
+                    Horario a confirmar
+                </span>
+
+            </div>
+
+
+            <div class="detail-separator">
+                ✦
+            </div>
+
+
+            <!-- CELEBRACIÓN -->
+
+            <div class="detail-item">
+
+                <div class="detail-icon">
+                    ♡
+                </div>
+
+                <h3>
+                    Celebración
+                </h3>
+
+                <p>
+                    Después de la ceremonia
+                </p>
+
+                <span>
+                    Lugar a confirmar
+                </span>
+
+            </div>
+
+
+            <div class="detail-separator">
+                ✦
+            </div>
+
+
+            <!-- DRESS CODE -->
+
+            <div class="detail-item">
+
+                <div class="detail-icon">
+                    ♡
+                </div>
+
+                <h3>
+                    Dress code
+                </h3>
+
+                <p>
+                    Elegante
+                </p>
+
+                <span>
+                    Celebrá con nosotros
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- UBICACIÓN -->
+
+    <section class="section location">
+
+        <div class="location-inner">
+
+            <div class="eyebrow">
+                El gran día
+            </div>
+
+            <h2>
+                Ceremonia y celebración
+            </h2>
+
+            <p>
+                Lugar del evento · Buenos Aires
+            </p>
+
+            <div class="location-buttons">
+
+                <a
+                    href="https://maps.google.com/"
+                    target="_blank"
+                    class="location-button">
+                    GOOGLE MAPS
+                </a>
+
+                <a
+                    href="https://www.waze.com/"
+                    target="_blank"
+                    class="location-button">
+                    WAZE
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONFIRMACIÓN -->
+
+    <section class="section confirmation">
+
+        <div class="confirmation-inner">
+
+            <h2>
+                ¿Nos acompañás?
+            </h2>
+
+            <p>
+                Nos encantaría compartir este día tan
+                especial con vos. Confirmá tu asistencia
+                para que podamos esperarte.
+            </p>
+
+            <a
+                href="https://forms.google.com/"
+                target="_blank"
+                class="confirmation-button">
+                CONFIRMAR ASISTENCIA
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- REGALO -->
+
+    <section class="section gift">
+
+        <div class="gift-inner">
+
+            <div class="eyebrow">
+                Un detalle especial
+            </div>
+
+            <h2>
+                Si querés acompañarnos con un regalo
+            </h2>
+
+            <p>
+                Tu presencia es nuestro mejor regalo.
+                Si además querés hacernos un detalle,
+                podés hacerlo mediante transferencia.
+            </p>
+
+            <div class="bank-box">
+
+                <div class="alias">
+                    ALIAS A CONFIRMAR
+                </div>
+
+                <div class="cbu">
+                    CBU A CONFIRMAR
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACTO -->
+
+    <section class="section contact">
+
+        <h2>
+            ¿Tenés alguna consulta?
+        </h2>
+
+        <p>
+            Estamos para ayudarte.
+            Escribinos y te respondemos.
+        </p>
+
+        <a
+            href="https://wa.me/"
+            target="_blank"
+            class="contact-button">
+            ESCRIBINOS
+        </a>
+
+    </section>
+
+
+    <!-- FIRMA FINAL -->
+
+    <section class="ivory-signature">
+
+        <div class="ivory-line"></div>
+
+        <div class="final-names">
             Camila & Mateo
         </div>
 
-
-        <h2>
-            Un día para recordar
-        </h2>
-
-
-        <p class="details-intro">
-            Estamos felices de poder celebrar este momento
-            rodeados de las personas que queremos.
-        </p>
-
-
-        <!-- CEREMONIA -->
-
-        <div class="detail-item">
-
-            <div class="detail-icon">
-                ♡
-            </div>
-
-            <h3>
-                Ceremonia
-            </h3>
-
-            <p>
-                18 de abril de 2027
-            </p>
-
-            <span>
-                Horario a confirmar
-            </span>
-
+        <div class="ivory-logo">
+            IVORY
         </div>
 
-
-        <!-- SEPARADOR -->
-
-        <div class="detail-separator">
-            ✦
+        <div class="ivory-subtitle">
+            DISEÑOS DIGITALES
         </div>
 
+    </section>
 
-        <!-- CELEBRACIÓN -->
-
-        <div class="detail-item">
-
-            <div class="detail-icon">
-                ♡
-            </div>
-
-            <h3>
-                Celebración
-            </h3>
-
-            <p>
-                Después de la ceremonia
-            </p>
-
-            <span>
-                Lugar a confirmar
-            </span>
-
-        </div>
-
-
-        <!-- SEPARADOR -->
-
-        <div class="detail-separator">
-            ✦
-        </div>
-
-
-        <!-- DRESS CODE -->
-
-        <div class="detail-item">
-
-            <div class="detail-icon">
-                ♡
-            </div>
-
-            <h3>
-                Dress code
-            </h3>
-
-            <p>
-                Elegante
-            </p>
-
-            <span>
-                Celebrá con nosotros
-            </span>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     FIRMA IVORY
-====================================================== -->
-
-<section class="ivory-signature">
-
-    <div class="ivory-line"></div>
-
-    <div class="ivory-logo">
-        IVORY
-    </div>
-
-    <div class="ivory-subtitle">
-        CREACIONES DIGITALES
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     FOOTER
-====================================================== -->
-
-<footer>
-
-    <div class="footer-names">
-        Camila & Mateo
-    </div>
-
-    <p>
-        18 · 04 · 2027
-    </p>
-
-</footer>
-
-
-
-<!-- =====================================================
-     MÚSICA
-====================================================== -->
-
-<audio
-    id="music"
-    loop
-    preload="auto">
-
-    <source
-        src="./musica.mp3.mp3"
-        type="audio/mpeg">
-
-</audio>
-
-
-<button
-    class="music-btn"
-    id="musicButton"
-    onclick="toggleMusic()"
-    aria-label="Activar música">
-
-    ♫
-
-</button>
-
+</main>
 
 
 <script>
 
-
-/* =====================================================
+/* =========================
    MÚSICA
-====================================================== */
+========================= */
 
 const music =
     document.getElementById("music");
@@ -1560,75 +1361,60 @@ const musicButton =
 
 function startMusic(){
 
-    music.currentTime = 0;
+    music.volume = 0.75;
 
-    const playPromise =
-        music.play();
+    const promise = music.play();
 
-    if(playPromise !== undefined){
+    if(promise !== undefined){
 
-        playPromise
-            .then(function(){
+        promise.then(function(){
 
-                musicButton.innerHTML = "❚❚";
+            musicButton.innerHTML = "❚❚";
 
-                musicButton.setAttribute(
-                    "aria-label",
-                    "Pausar música"
-                );
+            musicButton.setAttribute(
+                "aria-label",
+                "Pausar música"
+            );
 
-            })
-            .catch(function(error){
+        }).catch(function(error){
 
-                console.log(
-                    "No se pudo reproducir la música:",
-                    error
-                );
+            console.log(
+                "La música no pudo iniciarse:",
+                error
+            );
 
-                musicButton.innerHTML = "♫";
-
-            });
+        });
 
     }
 
 }
 
 
-/* =====================================================
-   BOTÓN MÚSICA
-====================================================== */
-
 function toggleMusic(){
 
     if(music.paused){
 
         music.play()
+        .then(function(){
 
-            .then(function(){
+            musicButton.innerHTML = "❚❚";
 
-                musicButton.innerHTML = "❚❚";
+            musicButton.setAttribute(
+                "aria-label",
+                "Pausar música"
+            );
 
-                musicButton.setAttribute(
-                    "aria-label",
-                    "Pausar música"
-                );
+        })
+        .catch(function(){
 
-            })
+            alert(
+                "No se pudo reproducir la música. " +
+                "Verificá que el archivo " +
+                "musica.mp3.mp3 esté en la misma carpeta " +
+                "que index.html."
+            );
 
-            .catch(function(error){
-
-                console.log(
-                    "Error al reproducir:",
-                    error
-                );
-
-                alert(
-                    "No se pudo reproducir la música. " +
-                    "Verificá que el archivo " +
-                    "musica.mp3.mp3 esté en la misma carpeta que index.html."
-                );
-
-            });
+        });
 
     }else{
 
@@ -1646,43 +1432,30 @@ function toggleMusic(){
 }
 
 
-/* =====================================================
-   CONTROL DE ERROR
-====================================================== */
-
 music.addEventListener(
     "error",
     function(){
 
         console.log(
-            "No se encontró o no se pudo cargar musica.mp3.mp3"
+            "ERROR: No se encontró musica.mp3.mp3"
         );
 
     }
 );
 
 
-/* =====================================================
+/* =========================
    ABRIR INVITACIÓN
-====================================================== */
+========================= */
 
 function openInvitation(){
 
     const cover =
         document.getElementById("cover");
 
-
-    /* ABRIR SOBRE */
-
     cover.classList.add("opened");
 
-
-    /* INICIAR MÚSICA */
-
     startMusic();
-
-
-    /* IR A LA INVITACIÓN */
 
     setTimeout(function(){
 
@@ -1696,12 +1469,126 @@ function openInvitation(){
 
 }
 
-</script>
 
+/* =========================
+   CUENTA REGRESIVA
+========================= */
+
+function updateCountdown(){
+
+    /*
+       Fecha de la boda:
+       18 de abril de 2027
+       00:00 hora Argentina
+    */
+
+    const weddingDate =
+        new Date(
+            "2027-04-18T00:00:00-03:00"
+        ).getTime();
+
+    const now =
+        new Date().getTime();
+
+    const difference =
+        weddingDate - now;
+
+
+    /* Cuando llegue el día */
+
+    if(difference <= 0){
+
+        document.getElementById("days")
+            .textContent = "000";
+
+        document.getElementById("hours")
+            .textContent = "00";
+
+        document.getElementById("minutes")
+            .textContent = "00";
+
+        document.getElementById("seconds")
+            .textContent = "00";
+
+        return;
+    }
+
+
+    /* Días */
+
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    /* Horas */
+
+    const hours =
+        Math.floor(
+            (difference %
+            (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
+
+
+    /* Minutos */
+
+    const minutes =
+        Math.floor(
+            (difference %
+            (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
+
+
+    /* Segundos */
+
+    const seconds =
+        Math.floor(
+            (difference %
+            (1000 * 60)) /
+            1000
+        );
+
+
+    document.getElementById("days")
+        .textContent =
+        String(days).padStart(3,"0");
+
+
+    document.getElementById("hours")
+        .textContent =
+        String(hours).padStart(2,"0");
+
+
+    document.getElementById("minutes")
+        .textContent =
+        String(minutes).padStart(2,"0");
+
+
+    document.getElementById("seconds")
+        .textContent =
+        String(seconds).padStart(2,"0");
+
+}
+
+
+/* Ejecutar inmediatamente */
+
+updateCountdown();
+
+
+/* Actualizar cada segundo */
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+</script>
 
 </body>
 </html>
 ```
-
-
-
