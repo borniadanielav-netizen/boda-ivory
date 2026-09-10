@@ -9,6 +9,10 @@
 
 <style>
 
+/* =========================================================
+   PALETA IVORY
+========================================================= */
+
 :root{
     --ivory:#EEF3FA;
     --sand:#C8DCE7;
@@ -31,7 +35,10 @@ html{
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
     background:var(--ivory);
     color:var(--taupe);
     overflow-x:hidden;
@@ -41,9 +48,10 @@ button{
     font-family:inherit;
 }
 
-/* =========================
+
+/* =========================================================
    PORTADA
-========================= */
+========================================================= */
 
 .cover{
     min-height:100vh;
@@ -53,10 +61,23 @@ button{
     justify-content:center;
     position:relative;
     overflow:hidden;
+
     background:
-        radial-gradient(circle at 20% 20%, rgba(168,200,197,.25), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(213,194,158,.20), transparent 30%),
-        linear-gradient(135deg, #F7FAFD 0%, var(--ivory) 100%);
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(168,200,197,.25),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(213,194,158,.20),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #F7FAFD 0%,
+            var(--ivory) 100%
+        );
 }
 
 .envelope-wrapper{
@@ -75,46 +96,95 @@ button{
     perspective:1200px;
 }
 
-/* =========================
+
+/* =========================================================
    SOBRE
-========================= */
+========================================================= */
 
 .envelope-back{
     position:absolute;
     inset:0;
+
     background:#C8DCE7;
+
     border-radius:5px;
+
     box-shadow:
         0 25px 60px rgba(53,107,130,.18),
         0 8px 20px rgba(53,107,130,.10);
 }
 
-/* CONTENIDO INTERNO
-   SIN LETRAS
-*/
+
+/* CONTENIDO INTERNO VACÍO */
 
 .envelope-content{
     position:absolute;
     inset:0;
     z-index:2;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     pointer-events:none;
 }
 
-/* =========================
+
+/* =========================================================
+   SELLO
+========================================================= */
+
+.shell-seal{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:55px;
+    height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+
+    background:
+        rgba(248,248,245,.92);
+
+    border-radius:50%;
+
+    box-shadow:
+        0 6px 18px rgba(53,107,130,.18);
+
+    z-index:7;
+
+    transition:
+        opacity .45s ease,
+        transform .65s ease;
+}
+
+
+/* =========================================================
    FRENTE DEL SOBRE
-========================= */
+========================================================= */
 
 .envelope-front{
     position:absolute;
+
     left:0;
     right:0;
     bottom:0;
+
     height:72%;
+
     z-index:3;
+
     background:#BFD6E2;
+
     clip-path:polygon(
         0 0,
         50% 58%,
@@ -122,71 +192,63 @@ button{
         100% 100%,
         0 100%
     );
-    border-radius:0 0 5px 5px;
+
+    border-radius:
+        0 0 5px 5px;
 }
 
-/* =========================
+
+/* =========================================================
    SOLAPA
-========================= */
+========================================================= */
 
 .envelope-flap{
     position:absolute;
+
     left:0;
     right:0;
     top:0;
+
     height:67%;
+
     z-index:6;
+
     transform-origin:top center;
     transform-style:preserve-3d;
+
     background:#D3E3EB;
+
     clip-path:polygon(
         0 0,
         100% 0,
         50% 100%
     );
+
     transition:
         transform 1.15s cubic-bezier(.2,.75,.25,1);
 }
 
-/* =========================
-   SELLO
-========================= */
 
-.shell-seal{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:55px;
-    height:55px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:30px;
-    background:rgba(248,248,245,.92);
-    border-radius:50%;
-    box-shadow:
-        0 6px 18px rgba(53,107,130,.18);
-    z-index:7;
-    transition:
-        opacity .45s ease,
-        transform .65s ease;
-}
-
-/* =========================
-   MONOGRAMA QUE SUBE
-========================= */
+/* =========================================================
+   MONOGRAMA
+========================================================= */
 
 .rising-monogram{
     position:absolute;
+
     left:50%;
     bottom:24%;
+
     transform:
         translate(-50%,95px)
         scale(.82);
+
     opacity:0;
+
     z-index:10;
+
     pointer-events:none;
+
     white-space:nowrap;
 
     transition:
@@ -198,8 +260,11 @@ button{
     display:flex;
     align-items:center;
     justify-content:center;
+
     gap:12px;
+
     color:var(--ocean);
+
     text-shadow:
         0 2px 12px rgba(53,107,130,.13);
 }
@@ -209,6 +274,7 @@ button{
         Georgia,
         "Times New Roman",
         serif;
+
     font-size:58px;
     font-style:italic;
     line-height:1;
@@ -217,39 +283,53 @@ button{
 .monogram-heart{
     color:var(--coral);
     font-size:25px;
-    transform:translateY(-3px);
+
+    transform:
+        translateY(-3px);
 }
 
 .monogram-names{
     margin-top:12px;
+
     font-family:
         Georgia,
         "Times New Roman",
         serif;
+
     font-size:17px;
     letter-spacing:2px;
+
     text-align:center;
+
     color:var(--taupe);
 }
 
-/* =========================
+
+/* =========================================================
    BRILLOS
-========================= */
+========================================================= */
 
 .sparkles{
     position:absolute;
     inset:0;
+
     z-index:11;
+
     pointer-events:none;
 }
 
 .sparkles span{
     position:absolute;
+
     width:6px;
     height:6px;
+
     background:white;
+
     border-radius:50%;
+
     opacity:0;
+
     box-shadow:
         0 0 10px rgba(255,255,255,.95);
 }
@@ -274,44 +354,68 @@ button{
     top:65%;
 }
 
-/* =========================
-   DETALLES BOTÁNICOS
-========================= */
+
+/* =========================================================
+   DECORACIÓN DEL SOBRE
+========================================================= */
 
 .corner-botanical{
     position:absolute;
+
     width:90px;
     height:90px;
+
     z-index:4;
+
     opacity:.35;
+
     pointer-events:none;
 }
 
 .corner-left{
     left:-20px;
     bottom:-15px;
-    border-left:2px solid var(--aqua);
-    border-bottom:2px solid var(--aqua);
-    border-radius:0 0 0 70px;
-    transform:rotate(-10deg);
+
+    border-left:
+        2px solid var(--aqua);
+
+    border-bottom:
+        2px solid var(--aqua);
+
+    border-radius:
+        0 0 0 70px;
+
+    transform:
+        rotate(-10deg);
 }
 
 .corner-right{
     right:-20px;
     bottom:-15px;
-    border-right:2px solid var(--aqua);
-    border-bottom:2px solid var(--aqua);
-    border-radius:0 0 70px 0;
-    transform:rotate(10deg);
+
+    border-right:
+        2px solid var(--aqua);
+
+    border-bottom:
+        2px solid var(--aqua);
+
+    border-radius:
+        0 0 70px 0;
+
+    transform:
+        rotate(10deg);
 }
 
-/* =========================
-   TEXTO PORTADA
-========================= */
+
+/* =========================================================
+   TEXTO DE PORTADA
+========================================================= */
 
 .cover-text{
     margin-top:55px;
+
     text-align:center;
+
     transition:
         opacity .6s ease,
         transform .6s ease;
@@ -319,9 +423,13 @@ button{
 
 .cover-small{
     font-size:12px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     color:var(--ocean);
+
     margin-bottom:12px;
 }
 
@@ -330,23 +438,33 @@ button{
         Georgia,
         "Times New Roman",
         serif;
+
     font-size:30px;
+
     color:var(--taupe);
+
     margin-bottom:25px;
 }
 
-/* =========================
+
+/* =========================================================
    BOTÓN
-========================= */
+========================================================= */
 
 .open-btn{
     border:none;
+
     background:var(--ocean);
     color:white;
+
     padding:13px 28px;
+
     border-radius:30px;
+
     font-size:13px;
+
     letter-spacing:1px;
+
     cursor:pointer;
 
     box-shadow:
@@ -358,25 +476,31 @@ button{
 }
 
 .open-btn:hover{
-    transform:translateY(-2px);
+    transform:
+        translateY(-2px);
+
     box-shadow:
         0 12px 25px rgba(53,107,130,.28);
 }
 
 .open-btn:active{
-    transform:scale(.97);
+    transform:
+        scale(.97);
 }
 
-/* =========================
+
+/* =========================================================
    SOBRE ABIERTO
-========================= */
+========================================================= */
 
 .cover.opened .envelope-flap{
-    transform:rotateX(180deg);
+    transform:
+        rotateX(180deg);
 }
 
 .cover.opened .shell-seal{
     opacity:0;
+
     transform:
         translate(-50%,-12px)
         scale(.8);
@@ -384,6 +508,7 @@ button{
 
 .cover.opened .rising-monogram{
     opacity:1;
+
     transform:
         translate(-50%,-112px)
         scale(1);
@@ -391,16 +516,21 @@ button{
 
 .cover.opened .cover-text{
     opacity:0;
+
     pointer-events:none;
-    transform:translateY(10px);
+
+    transform:
+        translateY(10px);
 }
 
-/* =========================
-   ANIMACIÓN BRILLOS
-========================= */
+
+/* =========================================================
+   BRILLOS AL ABRIR
+========================================================= */
 
 .cover.opened .sparkles span{
-    animation:sparkle .9s ease forwards;
+    animation:
+        sparkle .9s ease forwards;
 }
 
 .cover.opened .sparkles span:nth-child(1){
@@ -438,80 +568,392 @@ button{
 
 }
 
-/* =========================
-   CONTENIDO INVITACIÓN
-========================= */
 
-.invitation{
+/* =========================================================
+   SECCIÓN BIENVENIDA
+========================================================= */
+
+.welcome{
+    padding:
+        120px 25px 100px;
+
+    text-align:center;
+
     background:var(--white);
 }
 
-.section{
-    padding:90px 20px;
-    text-align:center;
+.welcome-inner{
+    max-width:680px;
+
+    margin:0 auto;
 }
 
-.section h2{
+.eyebrow{
+    text-transform:uppercase;
+
+    letter-spacing:4px;
+
+    font-size:10px;
+
+    color:var(--coral);
+
+    margin-bottom:18px;
+}
+
+.welcome h2{
     font-family:
         Georgia,
         "Times New Roman",
         serif;
+
+    font-weight:400;
+
+    font-size:40px;
+
     color:var(--ocean);
-    font-size:34px;
-    margin-bottom:20px;
+
+    margin-bottom:25px;
 }
 
-.section p{
-    max-width:650px;
+.welcome p{
+    max-width:550px;
+
     margin:0 auto;
-    line-height:1.8;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:16px;
+
+    line-height:1.9;
+
     color:var(--taupe);
 }
 
-/* =========================
-   BIENVENIDA
-========================= */
 
-#welcome{
-    min-height:70vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+/* =========================================================
+   FOTOS
+========================================================= */
+
+.photos{
+    padding:
+        30px 20px 110px;
+
+    background:var(--white);
 }
 
-.welcome-inner{
-    max-width:700px;
+.photos-inner{
+    max-width:1050px;
+
+    margin:0 auto;
 }
 
-.welcome-inner .eyebrow{
-    text-transform:uppercase;
-    letter-spacing:3px;
-    font-size:11px;
+.photo-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:18px;
+}
+
+.photo{
+    position:relative;
+
+    overflow:hidden;
+
+    background:var(--sand);
+
+    border-radius:4px;
+
+    box-shadow:
+        0 12px 35px rgba(53,107,130,.10);
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:
+        transform .7s ease;
+}
+
+.photo:hover img{
+    transform:scale(1.035);
+}
+
+.photo:nth-child(1){
+    height:520px;
+}
+
+.photo:nth-child(2){
+    height:520px;
+}
+
+.photo:nth-child(3){
+    height:400px;
+}
+
+.photo:nth-child(4){
+    height:400px;
+}
+
+
+/* =========================================================
+   UN DÍA PARA RECORDAR
+========================================================= */
+
+.details{
+    background:var(--ivory);
+
+    padding:
+        115px 25px 105px;
+
+    text-align:center;
+}
+
+.details-inner{
+    width:100%;
+
+    max-width:620px;
+
+    margin:0 auto;
+}
+
+.details h2{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-weight:400;
+
+    font-size:39px;
+
+    letter-spacing:.5px;
+
+    color:var(--ocean);
+
+    margin-bottom:22px;
+}
+
+.details-intro{
+    max-width:480px;
+
+    margin:
+        0 auto 65px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:16px;
+
+    line-height:1.9;
+
+    color:var(--taupe);
+}
+
+
+/* =========================================================
+   ITEMS VERTICALES
+========================================================= */
+
+.detail-item{
+    width:100%;
+
+    padding:
+        15px 20px 25px;
+}
+
+.detail-icon{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
     color:var(--coral);
+
+    font-size:20px;
+
     margin-bottom:15px;
 }
 
-/* =========================
+.detail-item h3{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-weight:400;
+
+    font-size:25px;
+
+    letter-spacing:.5px;
+
+    color:var(--ocean);
+
+    margin-bottom:13px;
+}
+
+.detail-item p{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:16px;
+
+    color:var(--taupe);
+
+    margin-bottom:7px;
+}
+
+.detail-item span{
+    display:block;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size:11px;
+
+    letter-spacing:1.5px;
+
+    color:#6E8795;
+}
+
+
+/* =========================================================
+   SEPARADORES
+========================================================= */
+
+.detail-separator{
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:15px;
+
+    color:var(--champagne);
+
+    font-size:12px;
+
+    margin:10px 0;
+}
+
+.detail-separator::before,
+.detail-separator::after{
+    content:"";
+
+    display:block;
+
+    width:75px;
+
+    height:1px;
+
+    background:
+        rgba(213,194,158,.55);
+}
+
+
+/* =========================================================
+   FIRMA IVORY
+========================================================= */
+
+.ivory-signature{
+    padding:
+        75px 20px 80px;
+
+    text-align:center;
+
+    background:var(--white);
+}
+
+.ivory-line{
+    width:45px;
+
+    height:1px;
+
+    background:var(--champagne);
+
+    margin:
+        0 auto 28px;
+}
+
+.ivory-logo{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:26px;
+
+    letter-spacing:9px;
+
+    color:var(--ocean);
+
+    font-weight:400;
+
+    margin-left:9px;
+}
+
+.ivory-subtitle{
+    margin-top:10px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size:8px;
+
+    letter-spacing:3px;
+
+    color:#8BA0AA;
+}
+
+
+/* =========================================================
    MÚSICA
-========================= */
+========================================================= */
 
 .music-btn{
     position:fixed;
+
     right:22px;
     bottom:22px;
+
     width:48px;
     height:48px;
+
     border:none;
+
     border-radius:50%;
 
     background:var(--ocean);
+
     color:white;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     font-size:19px;
+
     cursor:pointer;
 
     z-index:9999;
@@ -520,17 +962,53 @@ button{
         0 8px 25px rgba(53,107,130,.25);
 
     transition:
-        transform .25s ease,
-        background .25s ease;
+        transform .25s ease;
 }
 
 .music-btn:hover{
-    transform:scale(1.08);
+    transform:
+        scale(1.08);
 }
 
-/* =========================
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:
+        55px 20px;
+
+    text-align:center;
+
+    background:var(--taupe);
+
+    color:white;
+}
+
+footer .footer-names{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:26px;
+
+    margin-bottom:10px;
+}
+
+footer p{
+    opacity:.8;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:600px){
 
@@ -572,128 +1050,144 @@ button{
             scale(1);
     }
 
+
+    /* BIENVENIDA */
+
+    .welcome{
+        padding:
+            90px 22px 75px;
+    }
+
+    .welcome h2{
+        font-size:32px;
+    }
+
+
+    /* FOTOS */
+
+    .photos{
+        padding:
+            15px 18px 80px;
+    }
+
+    .photo-grid{
+        grid-template-columns:1fr;
+
+        gap:14px;
+    }
+
+    .photo:nth-child(1),
+    .photo:nth-child(2),
+    .photo:nth-child(3),
+    .photo:nth-child(4){
+        height:430px;
+    }
+
+
+    /* DETALLES */
+
+    .details{
+        padding:
+            90px 22px 80px;
+    }
+
+    .details h2{
+        font-size:32px;
+    }
+
+    .details-intro{
+        font-size:15px;
+
+        line-height:1.8;
+
+        margin-bottom:50px;
+    }
+
+    .detail-item{
+        padding:
+            12px 10px 22px;
+    }
+
+    .detail-item h3{
+        font-size:23px;
+    }
+
+    .detail-separator{
+        margin:5px 0;
+    }
+
+    .detail-separator::before,
+    .detail-separator::after{
+        width:55px;
+    }
+
+
+    /* IVORY */
+
+    .ivory-signature{
+        padding:
+            60px 20px 70px;
+    }
+
+    .ivory-logo{
+        font-size:23px;
+        letter-spacing:7px;
+    }
+
+
+    /* MÚSICA */
+
     .music-btn{
         width:44px;
         height:44px;
+
         right:16px;
         bottom:16px;
     }
 
 }
 
-/* =========================
-   SECCIONES
-========================= */
-
-.details{
-    background:var(--ivory);
-}
-
-.details-grid{
-    max-width:900px;
-    margin:40px auto 0;
-    display:grid;
-    grid-template-columns:
-        repeat(3,1fr);
-    gap:20px;
-}
-
-.detail-card{
-    background:white;
-    padding:30px 20px;
-    border-radius:18px;
-
-    box-shadow:
-        0 10px 30px rgba(53,107,130,.08);
-}
-
-.detail-card h3{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-    color:var(--ocean);
-    margin-bottom:10px;
-}
-
-.detail-card p{
-    font-size:14px;
-    line-height:1.6;
-}
-
-@media(max-width:700px){
-
-    .details-grid{
-        grid-template-columns:1fr;
-        max-width:400px;
-    }
-
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    padding:60px 20px;
-    text-align:center;
-    background:var(--taupe);
-    color:white;
-}
-
-footer .footer-names{
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-    font-size:28px;
-    margin-bottom:10px;
-}
-
-footer p{
-    opacity:.8;
-    font-size:12px;
-    letter-spacing:1px;
-}
-
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================================
-     PORTADA
-========================================= -->
 
-<section class="cover" id="cover">
+<!-- =====================================================
+     PORTADA
+====================================================== -->
+
+<section
+    class="cover"
+    id="cover">
 
     <div class="envelope-wrapper">
 
         <div class="envelope">
 
-            <!-- Fondo del sobre -->
+
+            <!-- FONDO DEL SOBRE -->
+
             <div class="envelope-back"></div>
 
-            <!--
-                CONTENIDO INTERNO VACÍO
-                Ya NO aparecen:
-                Nuestra boda
-                Camila & Mateo
-                18 · 04 · 2027
-            -->
+
+            <!-- INTERIOR VACÍO -->
+
             <div class="envelope-content">
 
                 <div
                     class="shell-seal"
                     aria-hidden="true">
+
                     🐚
+
                 </div>
 
             </div>
 
-            <!-- =================================
-                 MONOGRAMA QUE SALE DEL SOBRE
-            ================================== -->
+
+            <!-- MONOGRAMA QUE SUBE -->
 
             <div class="rising-monogram">
 
@@ -719,7 +1213,8 @@ footer p{
 
             </div>
 
-            <!-- Brillos -->
+
+            <!-- BRILLOS -->
 
             <div class="sparkles">
 
@@ -730,22 +1225,26 @@ footer p{
 
             </div>
 
-            <!-- Frente del sobre -->
+
+            <!-- FRENTE -->
 
             <div class="envelope-front"></div>
 
-            <!-- Solapa -->
+
+            <!-- SOLAPA -->
 
             <div class="envelope-flap"></div>
 
-            <!-- Decoración -->
+
+            <!-- DECORACIÓN -->
 
             <div class="corner-botanical corner-left"></div>
             <div class="corner-botanical corner-right"></div>
 
         </div>
 
-        <!-- Texto inferior -->
+
+        <!-- TEXTO PORTADA -->
 
         <div class="cover-text">
 
@@ -772,116 +1271,236 @@ footer p{
 </section>
 
 
-<!-- =========================================
-     INVITACIÓN
-========================================= -->
 
-<main class="invitation" id="bienvenida">
+<!-- =====================================================
+     BIENVENIDA
+====================================================== -->
 
-    <section
-        class="section"
-        id="welcome">
+<section
+    class="welcome"
+    id="bienvenida">
 
-        <div class="welcome-inner">
+    <div class="welcome-inner">
 
-            <div class="eyebrow">
-                Camila & Mateo
+        <div class="eyebrow">
+            Camila & Mateo
+        </div>
+
+        <h2>
+            Nuestra historia
+        </h2>
+
+        <p>
+            Hay momentos que queremos guardar para siempre,
+            y este es uno de ellos.
+            Queremos compartir con ustedes el comienzo
+            de una nueva etapa de nuestras vidas.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOTOS
+====================================================== -->
+
+<section class="photos">
+
+    <div class="photos-inner">
+
+        <div class="photo-grid">
+
+
+            <!-- FOTO 1 -->
+
+            <div class="photo">
+
+                <img
+                    src="https://images.pexels.com/photos/39394234/pexels-photo-39394234.jpeg"
+                    alt="Camila y Mateo">
+
             </div>
 
-            <h2>
-                Nuestra historia
-            </h2>
 
-            <p>
-                Hay momentos que queremos guardar para siempre,
-                y este es uno de ellos.
-                Queremos compartir con ustedes el comienzo
-                de una nueva etapa de nuestras vidas.
-            </p>
+            <!-- FOTO 2 -->
+
+            <div class="photo">
+
+                <img
+                    src="https://images.pexels.com/photos/30232952/pexels-photo-30232952.jpeg"
+                    alt="Momentos de Camila y Mateo">
+
+            </div>
+
+
+            <!-- FOTO 3 -->
+
+            <div class="photo">
+
+                <img
+                    src="https://images.pexels.com/photos/25361559/pexels-photo-25361559.jpeg"
+                    alt="Celebración de boda">
+
+            </div>
+
+
+            <!-- FOTO 4 -->
+
+            <div class="photo">
+
+                <img
+                    src="https://images.pexels.com/photos/33535553/pexels-photo-33535553.jpeg"
+                    alt="Momento especial">
+
+            </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- =====================================
-         DETALLES
-    ====================================== -->
 
-    <section
-        class="section details">
+<!-- =====================================================
+     UN DÍA PARA RECORDAR
+====================================================== -->
+
+<section class="section details">
+
+    <div class="details-inner">
+
+
+        <div class="eyebrow">
+            Camila & Mateo
+        </div>
+
 
         <h2>
             Un día para recordar
         </h2>
 
-        <p>
+
+        <p class="details-intro">
             Estamos felices de poder celebrar este momento
             rodeados de las personas que queremos.
         </p>
 
-        <div class="details-grid">
 
-            <div class="detail-card">
+        <!-- CEREMONIA -->
 
-                <h3>
-                    Ceremonia
-                </h3>
+        <div class="detail-item">
 
-                <p>
-                    18 de abril de 2027
-                </p>
-
-                <p>
-                    Horario a confirmar
-                </p>
-
+            <div class="detail-icon">
+                ♡
             </div>
 
+            <h3>
+                Ceremonia
+            </h3>
 
-            <div class="detail-card">
+            <p>
+                18 de abril de 2027
+            </p>
 
-                <h3>
-                    Celebración
-                </h3>
-
-                <p>
-                    Después de la ceremonia
-                </p>
-
-                <p>
-                    Lugar a confirmar
-                </p>
-
-            </div>
-
-
-            <div class="detail-card">
-
-                <h3>
-                    Dress code
-                </h3>
-
-                <p>
-                    Elegante
-                </p>
-
-                <p>
-                    Celebrá con nosotros
-                </p>
-
-            </div>
+            <span>
+                Horario a confirmar
+            </span>
 
         </div>
 
-    </section>
 
-</main>
+        <!-- SEPARADOR -->
+
+        <div class="detail-separator">
+            ✦
+        </div>
 
 
-<!-- =========================================
+        <!-- CELEBRACIÓN -->
+
+        <div class="detail-item">
+
+            <div class="detail-icon">
+                ♡
+            </div>
+
+            <h3>
+                Celebración
+            </h3>
+
+            <p>
+                Después de la ceremonia
+            </p>
+
+            <span>
+                Lugar a confirmar
+            </span>
+
+        </div>
+
+
+        <!-- SEPARADOR -->
+
+        <div class="detail-separator">
+            ✦
+        </div>
+
+
+        <!-- DRESS CODE -->
+
+        <div class="detail-item">
+
+            <div class="detail-icon">
+                ♡
+            </div>
+
+            <h3>
+                Dress code
+            </h3>
+
+            <p>
+                Elegante
+            </p>
+
+            <span>
+                Celebrá con nosotros
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FIRMA IVORY
+====================================================== -->
+
+<section class="ivory-signature">
+
+    <div class="ivory-line"></div>
+
+    <div class="ivory-logo">
+        IVORY
+    </div>
+
+    <div class="ivory-subtitle">
+        CREACIONES DIGITALES
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
      FOOTER
-========================================= -->
+====================================================== -->
 
 <footer>
 
@@ -896,9 +1515,10 @@ footer p{
 </footer>
 
 
-<!-- =========================================
+
+<!-- =====================================================
      MÚSICA
-========================================= -->
+====================================================== -->
 
 <audio
     id="music"
@@ -923,11 +1543,13 @@ footer p{
 </button>
 
 
+
 <script>
 
-/* =========================================
+
+/* =====================================================
    MÚSICA
-========================================= */
+====================================================== */
 
 const music =
     document.getElementById("music");
@@ -972,9 +1594,9 @@ function startMusic(){
 }
 
 
-/* =========================================
-   BOTÓN DE MÚSICA
-========================================= */
+/* =====================================================
+   BOTÓN MÚSICA
+====================================================== */
 
 function toggleMusic(){
 
@@ -1024,9 +1646,9 @@ function toggleMusic(){
 }
 
 
-/* =========================================
-   ERROR DE AUDIO
-========================================= */
+/* =====================================================
+   CONTROL DE ERROR
+====================================================== */
 
 music.addEventListener(
     "error",
@@ -1040,24 +1662,27 @@ music.addEventListener(
 );
 
 
-/* =========================================
+/* =====================================================
    ABRIR INVITACIÓN
-========================================= */
+====================================================== */
 
 function openInvitation(){
 
     const cover =
         document.getElementById("cover");
 
-    /* Abrir sobre */
+
+    /* ABRIR SOBRE */
 
     cover.classList.add("opened");
 
-    /* Reproducir música */
+
+    /* INICIAR MÚSICA */
 
     startMusic();
 
-    /* Bajar hacia la invitación */
+
+    /* IR A LA INVITACIÓN */
 
     setTimeout(function(){
 
@@ -1073,8 +1698,10 @@ function openInvitation(){
 
 </script>
 
+
 </body>
 </html>
 ```
+
 
 
